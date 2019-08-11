@@ -4,8 +4,11 @@ FROM ruby:2.5.3
 # 必要なパッケージのインストール（基本的に必要になってくるものだと思うので削らないこと）
 RUN apt-get update -qq && \
     apt-get install -y build-essential \ 
-                       libpq-dev \
-                       nodejs
+                       libpq-dev
+
+# node.js
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+    && apt-get install -y nodejs npm && npm install n -g && n 12.0.0
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /sample_app
